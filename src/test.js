@@ -19,7 +19,18 @@ const items = [{ "id": 1, "name": "Item1" },
 
 app.get('/items/:id',(req, res)=>{
   console.log('requested item id', req.params.id);
-  res.json(items);
+  const id  = parseInt(req.params.id)
+  const oikeaid = id-1
+  const item = items[oikeaid].name
+  for(let i = 0; i <= items.length; i++){
+
+      if (id === i-1){
+        res.json(item)
+
+      };
+  };
+
+
 
 });
 //kaikki itemsit
