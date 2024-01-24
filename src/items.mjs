@@ -15,7 +15,9 @@ const getItemById=(req, res)=>{
     for(let i = 0; i <= items.length; i++){
 
         if (id === i-1){
-          res.json(item)
+            if (item);{
+                res.json(item)
+            };
 
         };
     };
