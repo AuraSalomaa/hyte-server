@@ -27,15 +27,44 @@ const getItemById=(req, res)=>{
   };
 
   const postItem = (req, res)=>{
-    res.json({message: 'item created'});
+    console.log("PostItem request body", req.body)
+    if (!req.body.name){
+        res.status(400).json({error: "item name missing"})
+
+    };
+    // new id: add 1 to last id number in the items array
+    const newId = items[items.length - 1].id + 1
+    const newitem ={id: newId, name:req.body.name}
+    items.push(newitem)
+    res.status(201).json({message: 'item created'});
   };
 
   const deleteItem = (req, res)=>{
-    res.json({message: 'delete placeholder'})
+    const index = items.findIndex(item => item.id == req.params.id);
+    if(index === -1){
+        return res.sendStatus(404);
+    }
+    const deleteItems = items.splice(index,1);
+    console.log("deleteItem:", deleteItems);
+    res.json({deleted_item: deleteItems[0]});
+    res.sendStatus(204)
   };
 
 
   const putItem = (req, res)=>{
+    const index = items.findIndex(item => item.id == req.params.id);
+    // not found
+    if(index === -1){
+        return res.sendStatus(404);
+    }
+    // bad request
+    if (!req.body.name){
+        res.status(400).json({error: "item name missing"})
+
+    };
+    items[index].name = req.body.name;
+    res.json({updated_item: items[index]})
+
     res.json({message: 'put placeholder'})
   };
 

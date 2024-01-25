@@ -7,6 +7,7 @@ import { deleteItem, getItemById, getItems, postItem, putItem } from './items.mj
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
+app.use(express.json())
 app.use(express.static('public'))
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
