@@ -4,6 +4,7 @@ import  express  from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import { deleteItem, getItemById, getItems, postItem, putItem } from './items.mjs';
+import { getUserByID, getUsers, postLogin, postUser, putUser } from './users.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
@@ -24,6 +25,18 @@ app.post('/items',postItem);
 app.put('/items/:id',putItem);
 // Delete
 app.delete('/items/:id', deleteItem)
+
+
+//user resources
+//list of users
+app.get('/users',getUsers);
+//get info of a user
+app.get('/users/:id', getUserByID);
+//user registerestion
+app.get
+app.post('/users/login', postLogin);
+// user information update
+app.put('/users/:id',putUser);
 
 
 
