@@ -33,7 +33,7 @@ app.get('/users',getUsers);
 //get info of a user
 app.get('/users/:id', getUserByID);
 //user registerestion
-app.get
+app.post('/users', postUser)
 app.post('/users/login', postLogin);
 // user information update
 app.put('/users/:id',putUser);

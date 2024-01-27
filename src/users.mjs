@@ -25,26 +25,31 @@ const users = [
 //Todo: Implement all of these
 const getUsers = (req, res)=>{
 
-    res.send("ei");
+    res.send(users);
 
 };
 
 const getUserByID = (req, res)=>{
-
-    res.send("ei");
+    const UserInformation = users.find(user => user.id == req.params.id);
+    if (UserInformation){
+        res.json(UserInformation);
+    }
+    else {
+        res.status(404).json({error:'Not found'})
+    }
 };
 
 
 const postUser = (req, res)=>{
-    const userCreds = req.body
-    if (!userCreds.username || userCreds.password){
-        res.status(400).json({error: "username or password required"})
+    const userCreds = req.body;
+    if (!userCreds.username || !userCreds.password || !userCreds.email){
+        res.status(400).json({error: "Username, password and an email is required"})
 
     };
     // new id: add 1 to last id number in the items array
-    const newId = items[items.length - 1].id + 1
-    const newitem ={id: newId, username: userCreds.username, password: userCreds.password }
-    items.push(newitem)
+    const newId = users[users.length - 1].id + 1
+    const newUser ={id: newId, username: userCreds.username, password: userCreds.password, email: userCreds.email }
+    users.push(newUser)
     res.status(201).json({message: 'User created!'});
   };
 
@@ -68,8 +73,20 @@ const postLogin = (req, res)=>{
 };
 
 const putUser = (req, res)=>{
+    const UserUpdate = users.findIndex(user => user.id == req.params.id);
+    if (UserUpdate === -1){
+        return res.sendStatus(404).json({error:"Käyttäjää ei löytynyt"});
 
-    res.send("ei");
+    };
+    const userCreds = req.body
+    if(!userCreds.username || !userCreds.password){
+        return res.status(400).json({error:"Missing password or username"})
+    }
+    users[UserUpdate].username = userCreds.username
+    users[UserUpdate].password = userCreds.password
+    users[UserUpdate].email = userCreds.password
+    res.json({updated_user: users[UserUpdate]});
+
 
 };
 
