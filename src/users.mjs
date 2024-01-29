@@ -84,7 +84,7 @@ const putUser = (req, res)=>{
     }
     users[UserUpdate].username = userCreds.username
     users[UserUpdate].password = userCreds.password
-    users[UserUpdate].email = userCreds.password
+    users[UserUpdate].email = userCreds.email
     res.json({updated_user: users[UserUpdate]});
 
 
