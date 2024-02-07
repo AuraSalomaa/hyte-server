@@ -62,8 +62,7 @@ CREATE TABLE Exercises (
 Insert into Users(username, password, email, user_level) values
 ('johndoe', 'temp-pw-1', 'johndoe@example.com','regular'),
 ('janedoe', 'temp-pw-2', 'janedoe@example.com', 'admin'),
-('mike_smith', 'temp-pw-3', 'mike@example.com','moderator'
-);
+('mike_smith', 'temp-pw-3', 'mike@example.com','moderator');
 
 --inserting multiple dairy entries at once--
 iNSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes, created_at) VALUES
@@ -80,7 +79,7 @@ INSERT INTO Medications (user_id, name, dosage, frequency, start_date, end_date)
 (1, 'Vitamin D', '1000 IU', 'Daily', '2024-01-01', '2024-06-01'),
 (2, 'Ibuprofen', '200 mg', 'As needed', '2024-01-05', '2024-01-20'),
 (2, 'Amoxicillin', '500 mg', 'Every 8 hours', '2024-01-10', '2024-01-20'),
-(4, 'Metformin', '500 mg', 'Twice a day', '2024-01-15', '2024-07-15'),
+(3, 'Metformin', '500 mg', 'Twice a day', '2024-01-15', '2024-07-15'),
 (2, 'Lisinopril', '10 mg', 'Daily', '2024-01-20', '2024-07-20');
 
 INSERT INTO Exercises (user_id, type, duration, intensity, date) VALUES

@@ -1,18 +1,17 @@
+-- Drop the database if it exists and then create it
 DROP DATABASE IF EXISTS HealthDiary;
--- muista pääset data baseen "use HealthDiary "
 CREATE DATABASE HealthDiary;
 
 USE HealthDiary;
 
 CREATE TABLE Users (
-    user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password  VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    user_level VARCHAR (10) NOT NULL DEFAULT 'regular'
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_level VARCHAR(10) DEFAULT 'regular'
 );
-
 
 CREATE TABLE DiaryEntries (
     entry_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,17 +24,6 @@ CREATE TABLE DiaryEntries (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-
-CREATE TABLE SOCIAL_REACTIONS (
-    entry_id INT NOT NULL AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL UNIQUE PRIMARY KEY ,
-    comment Text,
-    likes INT,
-    FOREIGN KEY (entry_id) REFERENCES DiaryEntries(entry_id),
-    FOREIGN KEY (username) REFERENCES Users(username)
-
-);
-
 
 CREATE TABLE Medications (
     medication_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -58,23 +46,20 @@ CREATE TABLE Exercises (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
---inserting multiple users at once--
-Insert into Users(username, password, email, user_level) values
-('johndoe', 'temp-pw-1', 'johndoe@example.com','regular'),
-('janedoe', 'temp-pw-2', 'janedoe@example.com', 'admin'),
-('mike_smith', 'temp-pw-3', 'mike@example.com','moderator'
-);
+-- Insert sample data
 
---inserting multiple dairy entries at once--
-iNSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes, created_at) VALUES
-  (1, '2024-01-10', 'Happy', 70.5, 8, 'Had a great day, felt energetic', '2024-01-10 20:00:00'),
-  (1, '2024-01-11', 'Tired', 70.2, 6, 'Long day at work, need rest', '2024-01-11 20:00:00'),
-  (2, '2024-01-10', 'Stressed', 65.0, 7, 'Busy day, a bit stressed out', '2024-01-10 21:00:00');
+INSERT INTO Users (username, password, email, created_at, user_level) VALUES
+('johndoe', 'hashed_password', 'johndoe@example.com', '2024-01-01 09:00:00', 'regular'),
+('janedoe', 'hashed_password', 'janedoe@example.com', '2024-01-02 10:00:00', 'admin'),
+('alice_jones', 'hashed_password', 'alice@example.com', '2024-01-04 08:30:00', 'regular'),
+('bob_brown', 'hashed_password', 'bob@example.com', '2024-01-05 07:45:00', 'regular');
 
-INSERT INTO SOCIAL_REACTIONS (entry_id, username, comment, likes) values
-(1,'johndoe', 'test2', 1),
-(2, 'janedoe', 'test3', 2),
-(3,'mike_smith', 'test4', 0);
+INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes, created_at) VALUES
+(1, '2024-01-10', 'Happy', 70.5, 8, 'Had a great workout session', '2024-01-10 20:00:00'),
+(2, '2024-01-11', 'Satisfied', 65.0, 7, 'Met with friends, had a good time', '2024-01-11 21:00:00'),
+(3, '2024-01-12', 'Tired', 68.0, 6, 'Work was demanding', '2024-01-12 22:00:00'),
+(4, '2024-01-13', 'Energetic', 55.0, 9, 'Went for a morning run', '2024-01-13 18:00:00'),
+(4, '2024-01-14', 'Relaxed', 75.0, 8, 'Spent the day reading', '2024-01-14 19:00:00');
 
 INSERT INTO Medications (user_id, name, dosage, frequency, start_date, end_date) VALUES
 (1, 'Vitamin D', '1000 IU', 'Daily', '2024-01-01', '2024-06-01'),
@@ -91,8 +76,3 @@ INSERT INTO Exercises (user_id, type, duration, intensity, date) VALUES
 (3, 'Swimming', 60, 'Low', '2024-01-18'),
 (3, 'Yoga', 50, 'Low', '2024-01-18'),
 (1, 'Weight Training', 40, 'High', '2024-01-19');
-
-
-select username, entry_date,  mood, notes from users, DiaryEntries.mood, where diaryentreis.user_id =
-users.user_id;
-
