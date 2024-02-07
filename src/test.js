@@ -3,8 +3,8 @@
 import  express  from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import { deleteItem, getItemById, getItems, postItem, putItem } from './items.mjs';
-import { getUserByID, getUsers, postLogin, postUser, putUser } from './users.mjs';
+import { deleteItem, getItemById, getItems, postItem, putItem } from '../controllers/item-controller.mjs';
+import { getUserByID, getUsers, postLogin, postUser, putUser } from '../controllers/user-controller.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
