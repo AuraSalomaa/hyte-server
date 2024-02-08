@@ -2,3 +2,4 @@ node_modules
 .prettier.js
 .vscode
 .eslinctrc.js
+.env

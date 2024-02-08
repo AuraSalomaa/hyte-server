@@ -1,93 +1,83 @@
-const users = [
-    {
-      id: 1,
-      username: "johndoe",
-      password: "password1",
-      email: "johndoe@example.com"
-    },
-    {
-      id: 2,
-      username: "janedoe",
-      password: "password2",
-      email: "janedoe@example.com"
-    },
-    {
-      id: 3,
-      username: "bobsmith",
-      password: "password3",
-      email: "bobsmith@example.com"
+import {
+    deleteUserById,
+    insertUser,
+    listAllUsers,
+    selectUserById,
+    updateUserById,
+  } from '../models/user-model.mjs';
+
+  // TODO: implement route handlers below for users (real data)
+
+  const getUsers = async (req, res) => {
+    const result = await listAllUsers();
+    if (result.error) {
+      return res.status(result.error).json(result);
     }
-  ];
-
-
-
-
-//Todo: Implement all of these
-const getUsers = (req, res)=>{
-
-    res.send(users);
-
-};
-
-const getUserByID = (req, res)=>{
-    const UserInformation = users.find(user => user.id == req.params.id);
-    if (UserInformation){
-        res.json(UserInformation);
-    }
-    else {
-        res.status(404).json({error:'Not found'})
-    }
-};
-
-
-const postUser = (req, res)=>{
-    const userCreds = req.body;
-    if (!userCreds.username || !userCreds.password || !userCreds.email){
-        res.status(400).json({error: "Username, password and an email is required"})
-
-    };
-    // new id: add 1 to last id number in the items array
-    const newId = users[users.length - 1].id + 1
-    const newUser ={id: newId, username: userCreds.username, password: userCreds.password, email: userCreds.email }
-    users.push(newUser)
-    res.status(201).json({message: 'User created!'});
+    return res.json(result);
   };
 
-
-
-const postLogin = (req, res)=>{
-
-    const userCreds = req.body;
-    if (!userCreds.username || !userCreds.password){
-        return res.sendStatus(400);
-    };
-    const userFound = users.find(user => user.username == userCreds.username);
-    //user not found
-    if (userFound.password === userCreds.password) {
-        res.json({message: 'logged in successfully', user: userFound});
-    } else {
-        return res.status(403).json({error: 'username/password invalid'});
-      }
-
-
-};
-
-const putUser = (req, res)=>{
-    const UserUpdate = users.findIndex(user => user.id == req.params.id);
-    if (UserUpdate === -1){
-        return res.sendStatus(404).json({error:"Käyttäjää ei löytynyt"});
-
-    };
-    const userCreds = req.body
-    if(!userCreds.username || !userCreds.password){
-        return res.status(400).json({error:"Missing password or username"})
+  const getUserById = async (req, res) => {
+    const result = await selectUserById(req.params.id);
+    if (result.error) {
+      return res.status(result.error).json(result);
     }
-    users[UserUpdate].username = userCreds.username
-    users[UserUpdate].password = userCreds.password
-    users[UserUpdate].email = userCreds.email
-    res.json({updated_user: users[UserUpdate]});
+    return res.json(result);
+  };
 
+  const postUser = async (req, res) => {
+    const {username, password, email} = req.body;
+    // check that all needed fields are included in request
+    if (username && password && email) {
+      const result = await insertUser(req.body);
+      if (result.error) {
+        return res.status(result.error).json(result);
+      }
+      return res.status(201).json(result);
+    } else {
+      return res.status(400).json({error: 400, message: 'bad request'});
+    }
+  };
 
-};
+  const putUser = async (req, res) => {
+    const user_id = req.params.id;
+    const {username, password, email} = req.body;
+    // check that all needed fields are included in request
+    if (user_id && username && password && email) {
+      const result = await updateUserById({user_id, ...req.body});
+      if (result.error) {
+        return res.status(result.error).json(result);
+      }
+      return res.status(201).json(result);
+    } else {
+      return res.status(400).json({error: 400, message: 'bad request'});
+    }
+  };
 
-export{getUsers, getUserByID, postUser, postLogin, putUser}
+  const deleteUser = async (req, res) => {
+    const result = await deleteUserById(req.params.id);
+    if (result.error) {
+      return res.status(result.error).json(result);
+    }
+    return res.json(result);
+  };
+
+  // Dummy login with mock data, returns user object if username & password match
+  const postLogin = (req, res) => {
+    const userCreds = req.body;
+    if (!userCreds.username || !userCreds.password) {
+      return res.sendStatus(400);
+    }
+    const userFound = users.find((user) => user.username == userCreds.username);
+    // user not found
+    if (!userFound) {
+      return res.status(403).json({error: 'username/password invalid'});
+    }
+    // check if posted password matches to user found password
+    if (userFound.password === userCreds.password) {
+      res.json({message: 'logged in successfully', user: userFound});
+    } else {
+      return res.status(403).json({error: 'username/password invalid'});
+    }
+  };
+
+  export {getUsers, getUserById, postUser, putUser, postLogin, deleteUser};
