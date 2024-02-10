@@ -4,7 +4,10 @@ import  express  from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import itemRouter from './router/item-router.mjs';
-import { getUserByID, getUsers, postLogin, postUser, putUser } from './controllers/user-controller.mjs';
+import { getUserById, getUsers, postLogin, postUser, putUser } from './controllers/user-controller.mjs';
+import { getItemById, getItems, postItem, putItem, deleteItem } from './controllers/item-controller.mjs';
+import userRouter from './router/user.router.mjs';
+import entryRouter from './router/entry-router.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
@@ -17,6 +20,8 @@ app.use('/sivusto', express.static(path.join(__dirname, '../public')));
 
 //yksittäiset itemsit id:n avulla
 app.use('/items',itemRouter)
+app.use('/users', userRouter)
+app.use('/', entryRouter)
 //kaikki itemsit
 // app.get('/items', getItems);
 // // POST
@@ -29,14 +34,14 @@ app.use('/items',itemRouter)
 
 //user resources
 //list of users
-app.get('/users',getUsers);
-//get info of a user
-app.get('/users/:id', getUserByID);
-//user registerestion
-app.post('/users', postUser)
-app.post('/users/login', postLogin);
-// user information update
-app.put('/users/:id',putUser);
+// app.get('/users',getUsers);
+// //get info of a user
+// app.get('/users/:id', getUserById);
+// //user registerestion
+// app.post('/users', postUser)
+// app.post('/users/login', postLogin);
+// // user information update
+// app.put('/users/:id',putUser);
 
 
 

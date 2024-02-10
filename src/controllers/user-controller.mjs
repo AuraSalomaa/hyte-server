@@ -4,7 +4,7 @@ import {
     listAllUsers,
     selectUserById,
     updateUserById,
-  } from '../models/user-model.mjs';
+  } from '../models/user-models.mjs';
 
   // TODO: implement route handlers below for users (real data)
 

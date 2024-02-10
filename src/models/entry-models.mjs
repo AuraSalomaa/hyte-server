@@ -1,0 +1,45 @@
+import promisePool from '../database.mjs';
+
+const listAllEntries = async () => {
+  try {
+    const [rows] = await promisePool.query('SELECT * FROM DiaryEntries');
+    console.log('rows', rows);
+    return rows;
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};
+
+const findEntryById = async (id) => {
+  try {
+    const sql = 'SELECT * FROM DiaryEntries WHERE entry_id = ?';
+    const params = [id];
+    const [rows] = await promisePool.query(sql, params);
+    if (rows.length === 0) {
+      return {error: 404, message: ''};
+    }
+    // Remove password property from result
+    return rows[0];
+  } catch (error) {
+    console.error('findEntryById', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
+const addEntry = async (entry) => {
+  const {user_id, entry_date, mood, weight, sleep_hours, notes} = entry;
+  const sql = `INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes)
+               VALUES (?, ?, ?, ?, ?, ?)`;
+  const params = [user_id, entry_date, mood, weight, sleep_hours, notes];
+  try {
+    const rows = await promisePool.query(sql, params);
+    console.log('rows', rows);
+    return {entry_id: rows[0].insertId};
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};
+
+export {listAllEntries, findEntryById, addEntry};
