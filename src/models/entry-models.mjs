@@ -27,19 +27,51 @@ const findEntryById = async (id) => {
   }
 };
 
-const addEntry = async (entry) => {
-  const {user_id, entry_date, mood, weight, sleep_hours, notes} = entry;
-  const sql = `INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes)
-               VALUES (?, ?, ?, ?, ?, ?)`;
-  const params = [user_id, entry_date, mood, weight, sleep_hours, notes];
+const addEntry = async (DiaryEntries) => {
   try {
-    const rows = await promisePool.query(sql, params);
-    console.log('rows', rows);
-    return {entry_id: rows[0].insertId};
-  } catch (e) {
-    console.error('error', e.message);
-    return {error: e.message};
+    const sql = 'INSERT INTO DiaryEntries (user_id,entry_date, mood,weight, sleep_hours,notes) VALUES (?,?,?, ?, ?,?)';
+    const params = [DiaryEntries.user_id, DiaryEntries.entry_date, DiaryEntries.mood, DiaryEntries.weight, DiaryEntries.sleep_hours, DiaryEntries.notes];
+    const [result] = await promisePool.query(sql, params);
+    //console.log(result);
+    return {message: 'new user created', entry_id: result.entry_id};
+  } catch (error) {
+    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
+    console.error('insertUser', error);
+    return {error: 500, message: 'db error'};
   }
 };
 
-export {listAllEntries, findEntryById, addEntry};
+const UpdateEntryById = async (DiaryEntries) => {
+  try {
+    const sql = 'UPDATE DiaryEntries SET entry_date=?, mood=?, weight=?, sleep_hours=?, notes=? WHERE entry_id=?';
+    const params = [DiaryEntries.entry_date, DiaryEntries.mood,DiaryEntries.weight, DiaryEntries.sleep_hours,DiaryEntries.notes, DiaryEntries.entry_id];
+    const [result] = await promisePool.query(sql, params);
+    console.log(result);
+    return {message: 'Entry updated', entry_id: DiaryEntries.entry_id};
+  } catch (error) {
+    // fix error handling
+    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
+    console.error('UpdateEntryById', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
+
+const DeleteEntryById = async (id) => {
+  try {
+    const sql = 'DELETE FROM DiaryEntries WHERE entry_id=?';
+    const params = [id];
+    const [result] = await promisePool.query(sql, params);
+    console.log(result);
+    if (result.affectedRows === 0) {
+      return {error: 404, message: 'user not found'};
+    }
+    return {message: 'user deleted', entry_id: id};
+  } catch (error) {
+    // note that users with other data (FK constraint) cant be deleted directly
+    console.error('deleteUserById', error);
+    return {error: 500, message: 'db error'};
+  }
+};
+
+export {listAllEntries, findEntryById, addEntry, UpdateEntryById, DeleteEntryById};

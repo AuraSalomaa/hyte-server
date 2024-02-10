@@ -21,7 +21,7 @@ app.use('/sivusto', express.static(path.join(__dirname, '../public')));
 //yksittäiset itemsit id:n avulla
 app.use('/items',itemRouter)
 app.use('/users', userRouter)
-app.use('/', entryRouter)
+app.use('/entries', entryRouter)
 //kaikki itemsit
 // app.get('/items', getItems);
 // // POST
