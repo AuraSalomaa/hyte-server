@@ -8,6 +8,9 @@ import { getUserById, getUsers, postLogin, postUser, putUser } from './controlle
 import { getItemById, getItems, postItem, putItem, deleteItem } from './controllers/item-controller.mjs';
 import userRouter from './router/user.router.mjs';
 import entryRouter from './router/entry-router.mjs';
+import cors from 'cors';
+import logger from './middlewares/logger.mjs';
+import authRouter from './router/auth-router.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
@@ -17,11 +20,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use('/sivusto', express.static(path.join(__dirname, '../public')));
 
-
+app.use(cors())
+app.use(logger);
 //yksittäiset itemsit id:n avulla
-app.use('/items',itemRouter)
-app.use('/users', userRouter)
-app.use('/entries', entryRouter)
+app.use('/api/items',itemRouter)
+app.use('/api/users', userRouter)
+app.use('/api/entries', entryRouter)
+app.use('/api/auth', authRouter)
 //kaikki itemsit
 // app.get('/items', getItems);
 // // POST
