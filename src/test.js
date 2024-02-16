@@ -4,7 +4,7 @@ import  express  from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import itemRouter from './router/item-router.mjs';
-import { getUserById, getUsers, postLogin, postUser, putUser } from './controllers/user-controller.mjs';
+import { getUserById, getUsers, postUser, putUser } from './controllers/user-controller.mjs';
 import { getItemById, getItems, postItem, putItem, deleteItem } from './controllers/item-controller.mjs';
 import userRouter from './router/user.router.mjs';
 import entryRouter from './router/entry-router.mjs';
@@ -27,6 +27,7 @@ app.use('/api/items',itemRouter)
 app.use('/api/users', userRouter)
 app.use('/api/entries', entryRouter)
 app.use('/api/auth', authRouter)
+
 //kaikki itemsit
 // app.get('/items', getItems);
 // // POST

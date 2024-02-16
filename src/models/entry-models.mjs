@@ -11,13 +11,26 @@ const listAllEntries = async () => {
   }
 };
 
+
+const listAllEntriesByUserId = async () => {
+  try {
+    const sql = 'SELECT * FROM DiaryEntries where user_id=?';
+    const params = [id]
+    const [rows] = await(sql,params)
+    return [rows] ;
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};
+
 const findEntryById = async (id) => {
   try {
     const sql = 'SELECT * FROM DiaryEntries WHERE entry_id = ?';
     const params = [id];
     const [rows] = await promisePool.query(sql, params);
     if (rows.length === 0) {
-      return {error: 404, message: ''};
+      return {error: 404, message: 'not found'};
     }
     // Remove password property from result
     return rows[0];
@@ -74,4 +87,4 @@ const DeleteEntryById = async (id) => {
   }
 };
 
-export {listAllEntries, findEntryById, addEntry, UpdateEntryById, DeleteEntryById};
+export {listAllEntries, findEntryById, addEntry, UpdateEntryById, DeleteEntryById, listAllEntriesByUserId};
