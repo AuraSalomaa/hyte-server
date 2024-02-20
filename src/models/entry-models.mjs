@@ -12,12 +12,12 @@ const listAllEntries = async () => {
 };
 
 
-const listAllEntriesByUserId = async () => {
+const listAllEntriesByUserId = async (id) => {
   try {
     const sql = 'SELECT * FROM DiaryEntries where user_id=?';
     const params = [id]
-    const [rows] = await(sql,params)
-    return [rows] ;
+    const [rows] = await promisePool.query(sql,params)
+    return [rows]
   } catch (e) {
     console.error('error', e.message);
     return {error: e.message};

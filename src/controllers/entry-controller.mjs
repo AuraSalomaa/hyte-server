@@ -1,12 +1,14 @@
-import {listAllEntries, findEntryById, addEntry,UpdateEntryById, DeleteEntryById } from "../models/entry-models.mjs";
-
+import {listAllEntries, findEntryById, addEntry,UpdateEntryById, DeleteEntryById, listAllEntriesByUserId } from "../models/entry-models.mjs";
+import bcrypt from 'bcryptjs';
 const getEntries = async (req, res) => {
-  const result = await listAllEntries();
-  if (result.error) {
-    return res.status(result.error).json(result);
-  }
-  return res.json(result);
-};
+    // return only logged in user's own entries
+    const token_user_id = req.user.user_id;
+    const user_password = req.user.password
+    const result = await listAllEntriesByUserId(token_user_id);
+    if (token_user_id){
+        res.json(result)
+    };
+  };
 
 const getEntryById = async (req, res) => {
   const entry = await findEntryById(req.params.id);
@@ -54,5 +56,6 @@ const deleteEntry = async(req, res) => {
   }
   return res.json({message: "Entry has been deleted"});
 };
+
 
 export {getEntries, getEntryById, postEntry, putEntry, deleteEntry};
