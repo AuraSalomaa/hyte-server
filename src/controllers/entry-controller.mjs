@@ -1,13 +1,22 @@
 import {listAllEntries, findEntryById, addEntry,UpdateEntryById, DeleteEntryById, listAllEntriesByUserId } from "../models/entry-models.mjs";
 import bcrypt from 'bcryptjs';
 const getEntries = async (req, res) => {
+  try{
     // return only logged in user's own entries
     const token_user_id = req.user.user_id;
     const user_password = req.user.password
     const result = await listAllEntriesByUserId(token_user_id);
+    if (!token_user_id){
+        return res.status(401).json({message:"Unauthorized user"})
+    }
     if (token_user_id){
         res.json(result)
-    };
+    }
+
+  } catch(error){
+    res.status(500).json({message:"Jotain meni vikaan serverin puolella"})
+
+  }
   };
 
 const getEntryById = async (req, res) => {
@@ -51,10 +60,16 @@ const putEntry = async(req, res) => {
 
 const deleteEntry = async(req, res) => {
   const result = await DeleteEntryById(req.params.id);
+  const token_user_id = req.user.user_id
   if (result.error) {
     return res.status(result.error).json({message: "there was a proplem at deleted from the table"});
   }
-  return res.json({message: "Entry has been deleted"});
+  if (token_user_id){
+    return res.json({message: "Entry has been deleted"});
+  } else {
+    return res.status(401).json({message:"Unauthorized"})
+  }
+
 };
 
 

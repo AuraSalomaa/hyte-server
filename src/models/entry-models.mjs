@@ -46,7 +46,7 @@ const addEntry = async (DiaryEntries) => {
     const params = [DiaryEntries.user_id, DiaryEntries.entry_date, DiaryEntries.mood, DiaryEntries.weight, DiaryEntries.sleep_hours, DiaryEntries.notes];
     const [result] = await promisePool.query(sql, params);
     //console.log(result);
-    return {message: 'new user created', entry_id: result.entry_id};
+    return {message: 'new entry created', entry_id: result.entry_id};
   } catch (error) {
     // now duplicate entry error is generic 500 error, should be fixed to 400 ?
     console.error('insertUser', error);
