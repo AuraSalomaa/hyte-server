@@ -9,18 +9,32 @@ import {
 
 const getUsers = async (req, res) => {
   const result = await listAllUsers();
+  const token_user_id = req.user.user_id
   if (result.error) {
     return res.status(result.error).json(result);
+
   }
-  return res.json(result);
+  if (token_user_id){
+    return res.json(result);
+  }
+  else{
+    res.status(401).json({message:"unauthorized"})
+  }
+
 };
 
 const getUserById = async (req, res) => {
   const result = await selectUserById(req.params.id);
+  const token_user_id = req.user.user_id;
   if (result.error) {
     return res.status(result.error).json(result);
   }
-  return res.json(result);
+  if(token_user_id){
+    return res.json(result);
+  }
+  else{
+    res.status(401).json({message:"unauthorized"})
+  }
 };
 
 const postUser = async (req, res) => {
@@ -70,10 +84,16 @@ const putUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const result = await deleteUserById(req.params.id);
+  const token_user_id = req.user.user_id;
   if (result.error) {
     return res.status(result.error).json(result);
   }
-  return res.json(result);
+  if (token_user_id){
+    return res.json(result);
+  }
+  else{
+    res.status(401).json({message:"Unauthorized"})
+  }
 };
 
 export {getUsers, getUserById, postUser, putUser, deleteUser};

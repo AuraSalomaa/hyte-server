@@ -23,10 +23,10 @@ userRouter.route('/:id')
   // update user
   .put(authenticateToken,putUser)
   // get info of a user
-  .get(getUserById)
+  .get(authenticateToken,getUserById)
 
   // delete user based on id
-  .delete(deleteUser);
+  .delete(authenticateToken,deleteUser);
 
 // user login
 
