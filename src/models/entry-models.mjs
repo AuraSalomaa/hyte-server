@@ -40,17 +40,19 @@ const findEntryById = async (id) => {
   }
 };
 
-const addEntry = async (DiaryEntries) => {
+const addEntry = async (entry) => {
+  const {user_id, entry_date, mood, weight, sleep_hours, notes} = entry;
+  const sql = `INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes)
+  VALUES (?, ?, ?, ?, ?, ?)`;
+  const params = [user_id, entry_date, mood, weight, sleep_hours, notes];
   try {
-    const sql = 'INSERT INTO DiaryEntries (user_id,entry_date, mood,weight, sleep_hours,notes) VALUES (?,?,?, ?, ?,?)';
-    const params = [DiaryEntries.user_id, DiaryEntries.entry_date, DiaryEntries.mood, DiaryEntries.weight, DiaryEntries.sleep_hours, DiaryEntries.notes];
-    const [result] = await promisePool.query(sql, params);
-    //console.log(result);
-    return {message: 'new entry created', entry_id: result.entry_id};
-  } catch (error) {
-    // now duplicate entry error is generic 500 error, should be fixed to 400 ?
-    console.error('insertUser', error);
-    return {error: 500, message: 'db error'};
+    // change query method?
+    const rows = await promisePool.query(sql, params);
+    // console.log('rows', rows);
+    return {entry_id: rows[0].insertId};
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
   }
 };
 

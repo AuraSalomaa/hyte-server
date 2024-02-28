@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import {listAllEntries, findEntryById, addEntry,UpdateEntryById, DeleteEntryById, listAllEntriesByUserId } from "../models/entry-models.mjs";
 import bcrypt from 'bcryptjs';
 const getEntries = async (req, res) => {
@@ -28,17 +29,31 @@ const getEntryById = async (req, res) => {
   }
 };
 
-const postEntry = async (req, res) => {
-  const {entry_date, mood,weight,sleep_hours} = req.body;
-  // check that all needed fields are included in request
-  if (entry_date && mood && weight && sleep_hours) {
-    const result = await addEntry(req.body);
-    if (result.error) {
-      return res.status(result.error).json(result);
-    }
-    return res.status(201).json(result);
+const postEntry = async (req, res, next) => {
+  const token_user_id = req.user.user_id;
+  if(!token_user_id){
+    res.status(401).json({message:'Unauthorized'})
+  }else{
+  const {user_id, entry_date, mood, weight, sleep_hours, notes} = req.body;
+  const validationError = validationResult(req);
+  if (validationError.isEmpty()) {
+      const result = await addEntry({
+        user_id,
+        entry_date,
+        mood,
+        weight,
+        sleep_hours,
+        notes
+
+      }, next);
+      return res.status(201).json(result);
   } else {
-    return res.status(400).json({error: 400, message: 'bad request'});
+    const error = new Error('bad request');
+    error.status = 400;
+    error.errors = validationError.errors
+    return next(error)
+    }
+
   }
 };
 
