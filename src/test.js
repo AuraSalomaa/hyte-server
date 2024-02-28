@@ -11,6 +11,7 @@ import entryRouter from './router/entry-router.mjs';
 import cors from 'cors';
 import logger from './middlewares/logger.mjs';
 import authRouter from './router/auth-router.mjs';
+import { errorHandler, notFoundHandler } from './middlewares/error-handler.mjs';
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
@@ -27,6 +28,11 @@ app.use('/api/items',itemRouter)
 app.use('/api/users', userRouter)
 app.use('/api/entries', entryRouter)
 app.use('/api/auth', authRouter)
+//default 404 note
+app.use(notFoundHandler)
+// Error handler for sending responses to all error cases
+app.use(errorHandler)
+
 
 //kaikki itemsit
 // app.get('/items', getItems);

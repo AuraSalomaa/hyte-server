@@ -7,6 +7,7 @@ import {
   deleteUser,
 } from '../controllers/user-controller.mjs';
 import { authenticateToken } from '../middlewares/authentication.mjs';
+import {body} from 'express-validator';
 
 const userRouter = express.Router();
 
@@ -16,7 +17,11 @@ userRouter.route('/')
   .get(authenticateToken, getUsers)
     // update user
 
-  .post(postUser);
+  .post(
+    body('username').trim().isLength({min: 3, max:20}).isAlphanumeric(),
+    body('password').trim().isLength({min:8, max: 128}),
+    body('email').trim().isEmail(),
+    postUser);
 
 // /user/:id endpoint
 userRouter.route('/:id')
