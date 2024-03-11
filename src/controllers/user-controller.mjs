@@ -18,11 +18,21 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
+  const token = req.user.user_id;
   const result = await selectUserById(req.params.id);
   if (result.error) {
     return res.status(result.error).json(result);
   }
-  return res.json(result);
+  if (token){
+      return res.json(result);
+
+  }
+  else{
+    return res.json({message:"unauthorized"})
+
+  }
+
+
 };
 
 const postUser = async (req, res, next) => {
