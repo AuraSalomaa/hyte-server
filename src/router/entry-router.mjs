@@ -18,10 +18,10 @@ const entryRouter = express.Router();
  *
  * @apiSuccess {Array} entries[] array of Diary entries.
  * @apiSuccess {Number} entry_id ID of Diary entry.
- * @apiSucess {Date} entries.entry_date The user putten date.
+ * @apiSuccess {Date} entries.entry_date The user putten date.
  * @apiSuccess {String} entries.mood Users mood when posting the Entry.
  * @apiSuccess {Number} entries.weight Users weight.
- * @apiSucess {Number} entries.sleep_hours The number of hours the user slept.
+ * @apiSuccess {Number} entries.sleep_hours The number of hours the user slept.
  * @apiSuccess {String} entries.notes A string of user written notes.
  * @apiSuccess {Time} entries.created_at time the entry was puplished.
  *
