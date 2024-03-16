@@ -10,6 +10,16 @@ import {authenticateToken} from '../middlewares/authentication.mjs'
 import { body } from 'express-validator';
 
 const entryRouter = express.Router();
+/**
+ * @api {get} /api/resource/:id Request Resource information
+ * @apiName GetResource
+ * @apiGroup Resource
+ *
+ * @apiParam {Number} id Resource unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the Resource.
+ * @apiSuccess {String} lastname  Lastname of the Resource.
+ */
 
 entryRouter.route('/')
   .get(authenticateToken, getEntries)

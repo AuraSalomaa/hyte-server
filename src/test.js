@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(express.static('public'))
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use('/sivusto', express.static(path.join(__dirname, '../public')));
+app.use('/docs', express.static(path.join(__dirname, '../docs')));
 
 app.use(cors())
 app.use(logger);
