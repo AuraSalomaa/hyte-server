@@ -8,6 +8,9 @@ import {
 } from '../controllers/user-controller.mjs';
 import { authenticateToken } from '../middlewares/authentication.mjs';
 import {body} from 'express-validator';
+import { param } from 'express-validator';
+import { validationErrorHandler } from '../middlewares/error-handler.mjs';
+
 
 const userRouter = express.Router();
 
@@ -32,7 +35,7 @@ userRouter.route('/')
   .post(
     body('username').trim().isLength({min: 3, max:20}).isAlphanumeric(),
     body('password').trim().isLength({min:8, max: 128}),
-    body('email').trim().isEmail(),
+    body('email').trim().isEmail().normalizeEmail(),
     postUser);
 
 // /user/:id endpoint
@@ -40,10 +43,10 @@ userRouter.route('/:id')
   // update user
   .put(authenticateToken,putUser)
   // get info of a user
-  .get(getUserById)
+  .get(authenticateToken,param('id', 'must be integer').isInt(),validationErrorHandler,getUserById)
 
   // delete user based on id
-  .delete(deleteUser);
+  .delete(authenticateToken, param('id', 'must be integer').isInt(),validationErrorHandler,deleteUser);
 
 // user login
 

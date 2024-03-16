@@ -17,9 +17,25 @@ const entryRouter = express.Router();
  * @apiPermission token
  *
  * @apiSuccess {Array} entries[] array of Diary entries.
- * @apiSuccess {Number} entry_id
+ * @apiSuccess {Number} entry_id ID of Diary entry.
+ * @apiSucess {Date} entries.entry_date The user putten date.
+ * @apiSuccess {String} entries.mood Users mood when posting the Entry.
+ * @apiSuccess {Number} entries.weight Users weight.
+ * @apiSucess {Number} entries.sleep_hours The number of hours the user slept.
+ * @apiSuccess {String} entries.notes A string of user written notes.
+ * @apiSuccess {Time} entries.created_at time the entry was puplished.
+ *
+ *
  */
-
+// "entry_id": 1,
+//     "user_id": 1,
+//     "entry_date": "2024-01-10T00:00:00.000Z",
+//     "mood": "Happy",
+//     "weight": "70.50",
+//     "sleep_hours": 8,
+//     "notes": "Had a great workout session",
+//     "created_at": "2024-01-10T20:00:00.000Z"
+// }
 entryRouter.route('/')
   .get(authenticateToken, getEntries)
 
