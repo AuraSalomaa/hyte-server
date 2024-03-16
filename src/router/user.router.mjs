@@ -12,14 +12,18 @@ import {body} from 'express-validator';
 const userRouter = express.Router();
 
 /**
- * @api {get} /api/resource/:id Request Resource information
- * @apiName GetResource
- * @apiGroup Resource
+ * @api {get} /users Request user list
+ * @apiName GetUsers
+ * @apiGroup Users
+ * @apiPermission token
  *
  * @apiParam {Number} id Resource unique ID.
  *
- * @apiSuccess {String} firstname Firstname of the Resource.
- * @apiSuccess {String} lastname  Lastname of the Resource.
+ * @apiSuccess {Array} user[] array of Users.
+ * @apiSuccess {object} user User object.
+ * @apiSuccess {number} user.user_id Id of the User.
+ * @apiSuccess {String} user.username Username.
+ * @apiSuccess {String} user.user_level Userlevel of the User .
  */
 // /user endpoint
 userRouter.route('/')
