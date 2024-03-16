@@ -1,4 +1,4 @@
-
+import { validationResult } from "express-validator";
 /**
  * Custom error generator
  * @param {string} message - error message

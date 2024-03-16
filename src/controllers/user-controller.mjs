@@ -46,7 +46,7 @@ const postUser = async (req, res, next) => {
     error.status = 400;
     error.errors = validationError.errors
     return next(error)
-    return res.status(400).json({error: validationError.Error});
+    // return res.status(400).json({error: validationError.Error});
   }
 };
 
