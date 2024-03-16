@@ -66,7 +66,7 @@ authRouter
    *    HTTP/1.1 200 OK
    *    {
    *      "message": "Logged in successfully",
-   *      "token": "TOKEN-VALUE"
+   *      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJqb2huZG9lNCIsImVtYWlsIjoibWFpbGlAbWFpbGk0LmZpIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDMtMTNUMDc6NDk6MjUuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzEwNDE3Njc2LCJleHAiOjE3MTA1MDQwNzZ9.xZRd4gRq-lqs4xQyDcgOvGZdy0-7saglSdIgkzYOOAI"
    *      "user": {
    *        "user_id": 21,
    *        "username": "johnd",
@@ -90,7 +90,7 @@ authRouter
    * @apiName GetMe
    * @apiGroup Authentication
    * @apiPermission token
-   * @apiHeader {String} Authorization Bearer token.
+   * @apiHeader {String} Authorazation token.
    *
    * @apiSuccess {Object} user User info.
    * @apiSuccess {Number} user.user_id Id of the User.

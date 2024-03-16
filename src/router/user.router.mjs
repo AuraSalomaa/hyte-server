@@ -17,20 +17,18 @@ const userRouter = express.Router();
  * @apiGroup Users
  * @apiPermission token
  *
- * @apiParam {Number} id Resource unique ID.
- *
  * @apiSuccess {Array} user[] array of Users.
  * @apiSuccess {object} user User object.
  * @apiSuccess {number} user.user_id Id of the User.
  * @apiSuccess {String} user.username Username.
- * @apiSuccess {String} user.user_level Userlevel of the User .
+ *
+ *
  */
 // /user endpoint
 userRouter.route('/')
   // list users
   .get(authenticateToken, getUsers)
     // update user
-
   .post(
     body('username').trim().isLength({min: 3, max:20}).isAlphanumeric(),
     body('password').trim().isLength({min:8, max: 128}),

@@ -11,14 +11,13 @@ import { body } from 'express-validator';
 
 const entryRouter = express.Router();
 /**
- * @api {get} /api/resource/:id Request Resource information
- * @apiName GetResource
- * @apiGroup Resource
+ * @api {get} /api/entries/
+ * @apiName GetEntries
+ * @apiGroup Entries
+ * @apiPermission token
  *
- * @apiParam {Number} id Resource unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the Resource.
- * @apiSuccess {String} lastname  Lastname of the Resource.
+ * @apiSuccess {Array} entries[] array of Diary entries.
+ * @apiSuccess {Number} entry_id
  */
 
 entryRouter.route('/')

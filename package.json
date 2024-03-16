@@ -17,7 +17,7 @@
   "license": "ISC",
   "apidoc": {
     "title": "Health Diary API documentation",
-    "url": "https://hyte-server-aura.northeurope.cloudapp.azure.com/docs",
+    "url": "http://127.0.0.1/docs",
     "order": [
       "Authentication",
       "User"
