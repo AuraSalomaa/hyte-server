@@ -46,7 +46,7 @@ userRouter.route('/:id')
   .get(authenticateToken,param('id', 'must be integer').isInt(),validationErrorHandler,getUserById)
 
   // delete user based on id
-  .delete(authenticateToken, param('id', 'must be integer').isInt(),validationErrorHandler,deleteUser);
+  .delete(authenticateToken,deleteUser);
 
 // user login
 
