@@ -112,10 +112,14 @@ content-type: application/json
 # Delete entry
 DELETE https://hyte-server-aura.northeurope.cloudapp.azure.coma/api/entries/:id
 ```
-#database
+<h3><b>Database structure<b></h3>
+
 ![Database structure](database.png)
 
-#Frontend
+
+<h3><b>Frontend UI<b></h3>
+
+
 ![Front page](Indexhtml.png)
 
 ![Login page](loginpage.png)
@@ -129,19 +133,21 @@ DELETE https://hyte-server-aura.northeurope.cloudapp.azure.coma/api/entries/:id
 ![Profile Page](profilepage3.png)
 
 
-#Known bugs:
+<h3><b>Known bugs:<b></h3>
 
-Delete user function not yet working from the page, will be fixed as soon as possible.
-Clear front end messasing will be implemented.
-Some minor graphical issues might be possible.
-There is a chance that if you double press login, you get to the profile page.
+
+1. Delete user function not yet working from the page, will be fixed as soon as possible.
+2. Clear front end messasing will be implemented.
+3. Some minor graphical issues might be possible.
+4. There is a chance that if you double press login, you get to the profile page.
 
 Please report any other odd behavior on the page, I will try to patch them as well as I can.
 
-#Refrences:
+<h3><b>Refrences:<b></h3>
 
-https://www.w3schools.com/w3css/4/w3.css (used in frontend design)
-https://www.w3schools.com/w3css/tryw3css_templates_start_page.html(template page used in frontend)
+
+- https://www.w3schools.com/w3css/4/w3.css (used in frontend design)
+- https://www.w3schools.com/w3css/tryw3css_templates_start_page.html(template page used in frontend)
 
 
 
