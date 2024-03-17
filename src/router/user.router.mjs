@@ -43,7 +43,7 @@ userRouter.route('/:id')
   // update user
   .put(authenticateToken,putUser)
   // get info of a user
-  .get(authenticateToken,param('id', 'must be integer').isInt(),validationErrorHandler,getUserById)
+  .get(authenticateToken,validationErrorHandler,getUserById)
 
   // delete user based on id
   .delete(authenticateToken,deleteUser);
