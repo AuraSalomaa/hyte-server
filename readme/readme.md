@@ -100,12 +100,11 @@ content-type: application/json
 # Delete entry
 DELETE https://hyte-server-aura.northeurope.cloudapp.azure.coma/api/entries/:id
 
-
+#database
 ![Database structure](database.png)
 
-
-![Front page](indexhtml.png)
-
+#Frontend
+![Front page](Indexhtml.png)
 
 ![Login page](loginpage.png)
 
@@ -118,7 +117,7 @@ DELETE https://hyte-server-aura.northeurope.cloudapp.azure.coma/api/entries/:id
 ![Profile Page](profilepage3.png)
 
 
-Known bugs:
+#Known bugs:
 
 Delete user function not yet working from the page, will be fixed as soon as possible.
 Clear front end messasing will be implemented.
@@ -127,7 +126,7 @@ There is a chance that if you double press login, you get to the profile page.
 
 Please report any other odd behavior on the page, I will try to patch them as well as I can.
 
-refrencies:
+#Refrences:
 
 https://www.w3schools.com/w3css/4/w3.css (used in frontend design)
 https://www.w3schools.com/w3css/tryw3css_templates_start_page.html(template page used in frontend)
