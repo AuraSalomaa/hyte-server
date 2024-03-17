@@ -2,66 +2,77 @@
 Node.Js + Express
 
 Start dev server: `npm run dev`
+<h3><b>Usage<b></h3> :
+1. Clone/download code
+2. Run ```npm i``` inside the project folder
+3. Install & start Mysql/MariaDB server
+4. Import database script in ```db/``` folder
+5. Create .env file based on .env.sample
+6. Start the dev server: npm run dev/npm run start
 
-/items
 
+<h3><b>/api/auth<b></h3>
+example queries
 
+```
+
+  # Login
+  POST https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/login
+  content-type: application/json
+  {
+    "username": "johnDoe4",
+    "password": "Hashed_password4"
+  }
+
+  ## Get user by token (requires token)
+  GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/auth/me
+  Authorization: Bearer <token>
+
+```
+<h3><b>/api/users<b></h3>
 
 example queries
-# Login
-POST https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/login
-content-type: application/json
-{
-  "username": "johnDoe4",
-  "password": "Hashed_password4"
-}
 
-## Get user by token (requires token)
-GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/auth/me
-Authorization: Bearer <token>
+```
+  # Get all users (requires token)
+  GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users
+  Authorization: Bearer <token>
 
-/api/users
+  # Get user by id (requires token)
+  GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/:id
+  Authorization: Bearer <token>
 
-example queries
-# Get all users (requires token)
-GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users
-Authorization: Bearer <token>
+  # Delete user (requires token)
+  DELETE https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/:id
+  Authorization: Bearer <token>
 
-# Get user by id (requires token)
-GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/:id
-Authorization: Bearer <token>
+  # Create user (register)
+  POST https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users
+  content-type: application/json
 
-# Delete user (requires token)
-DELETE https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/:id
-Authorization: Bearer <token>
+  {
+    "username": "johndoe4",
+    "password": "hashed_password4",
+    "email": "email@email.com"
+  }
 
-# Create user (register)
-POST https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users
-content-type: application/json
+  # Update user's own data (requires token)
+  PUT https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/
+  Authorization: Bearer <token>
+  content-type: application/json
 
-{
-  "username": "johndoe4",
-  "password": "hashed_password4",
-  "email": "email@email.com"
-}
-
-# Update user's own data (requires token)
-PUT https://hyte-server-aura.northeurope.cloudapp.azure.com/api/users/
-Authorization: Bearer <token>
-content-type: application/json
-
-{
-  "username": "johndoe4",
-  "password": "hashed_password4",
-  "email": "email@email.com"
-}
-
-hyte-server-aura.northeurope.cloudapp.azure.com
+  {
+    "username": "johndoe4",
+    "password": "hashed_password4",
+    "email": "email@email.com"
+  }
+```
 
 
-/api/entries
+<h3><b>/api/entries<b></h3>
 
 example queries
+```
 # Get all entries for a logged in user (requires token)
 GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/entries
 Authorization: Bearer <token>
@@ -72,6 +83,7 @@ GET https://hyte-server-aura.northeurope.cloudapp.azure.com/api/entries/:id
 # Post entry
 POST https://hyte-server-aura.northeurope.cloudapp.azure.com/api/entries
 content-type: application/json
+
 
 {
   "user_id": 9,
@@ -99,7 +111,7 @@ content-type: application/json
 
 # Delete entry
 DELETE https://hyte-server-aura.northeurope.cloudapp.azure.coma/api/entries/:id
-
+```
 #database
 ![Database structure](database.png)
 
