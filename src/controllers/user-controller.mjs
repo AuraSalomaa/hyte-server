@@ -76,11 +76,13 @@ const putUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+  const user_id = req.user.user_id;
   const result = await deleteUserById(req.params.id);
   if (result.error) {
     return res.status(result.error).json(result);
   }
-  return res.json(result);
+  if (user_id)
+    return res.json(result);
 };
 
 export {getUsers, getUserById, postUser, putUser, deleteUser};
