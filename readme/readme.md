@@ -147,7 +147,7 @@ Please report any other odd behavior on the page, I will try to patch them as we
 
 
 - https://www.w3schools.com/w3css/4/w3.css (used in frontend design)
-- https://www.w3schools.com/w3css/tryw3css_templates_start_page.html(template page used in frontend)
+- https://www.w3schools.com/w3css/tryw3css_templates_start_page.html (template page used in frontend)
 
 
 
