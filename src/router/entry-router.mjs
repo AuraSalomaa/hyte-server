@@ -12,7 +12,7 @@ import { body } from 'express-validator';
 const entryRouter = express.Router();
 /**
  * @api {get} /api/entries/
- * @apiName GetEntries
+ * @apiName GetEntry
  * @apiGroup Entries
  * @apiPermission token
  *

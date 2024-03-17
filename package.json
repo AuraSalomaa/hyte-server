@@ -19,9 +19,7 @@
     "title": "Health Diary API documentation",
     "url": "http://127.0.0.1/docs",
     "order": [
-      "Authentication",
-      "User",
-      "Entries"
+      "Entry"
     ]
   },
   "devDependencies": {
