@@ -11,6 +11,11 @@ Start dev server: `npm run dev`
 5. Create .env file based on .env.sample
 6. Start the dev server: npm run dev/npm run start
 
+<h3><b>Link to my frontend and the website:<b></h3>
+
+- https://github.com/AuraSalomaa/hyteteht-vi-/tree/paivakirjaosa
+-  https://hyte-server-aura.northeurope.cloudapp.azure.com/dist/
+
 
 <h3><b>/api/auth<b></h3>
 example queries
