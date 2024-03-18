@@ -2,8 +2,9 @@
 Node.Js + Express
 
 Start dev server: `npm run dev`
-<h3><b>Usage<b></h3> :
-1. Clone/download code
+<h3><b>Usage<b></h3>
+
+1. Clone/download code.
 2. Run ```npm i``` inside the project folder
 3. Install & start Mysql/MariaDB server
 4. Import database script in ```db/``` folder
