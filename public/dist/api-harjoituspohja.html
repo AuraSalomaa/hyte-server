@@ -14,7 +14,7 @@
     <link rel="stylesheet" crossorigin href="/dist/assets/fetch-jqOKSZWW.css">
   </head>
 <body>
-
+  
   <div class="w3-top">
     <div class="w3-bar w3-red w3-card w3-left-align w3-large">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
@@ -23,7 +23,7 @@
       <a href="register.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Register</a>
       <a class="clearButton" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
     </div>
-
+  
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
       <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Home</a>
@@ -34,7 +34,7 @@
   </div>
     <!-- <div id="app"></div> -->
 
-
+   
     <!-- <div class="forms">
       <div style="flex: 1">
 
@@ -49,14 +49,14 @@
             </tr>
           </thead>
           <tbody class="tbody">
-
+     
           </tbody>
         </table> -->
 
-
-
+  
+       
 <div id = "test">
-
+      
     <div class="user"><h3>Hei kirjautunut käyttäjä: <span id="name">NIMI TÄHÄN</span></h3></div>
       <h4>Tilin muokkaus</h4>
         <form class="addform">
@@ -70,8 +70,8 @@
           <label for= "email">Email:</label><br>
           <input type ="email" id = "email" name = "email"><br>
           <button class ="update">Muokkaa tiliäsi</button>
-
-
+          
+          
 
 
 
@@ -81,23 +81,23 @@
         <button class="del">Poista käyttäjätilisi</button>
     <dialog class="info_dialog">
       <p>
-        <!-- tänne haetaan yksittäinen valittu käyttäjät -->
+        <!-- tänne haetaan yksittäinen valittu käyttäjät -->      
         <div>UserID: <span>Id</span></div>
         <div>UserName: <span>Username</span></div>
         <div>Email: <span>Email</span></div>
-        <div>Role: <span>Role</span></div>
+        <div>Role: <span>Role</span></div> 
       </p>
       <button autofocus>Close</button>
     </dialog>
 
-
-
-    <table class="styled-table">
+    
+    
+    <table class="styled-table"> 
       <tbody class="card-area">
       <!-- yksittäinen kortti -->
-
+      
         <!-- vasen puoli jossa kuva -->
-
+  
       </tbody>
   </table>
   <h4>Päiväkirjamerkinnät</h4>
@@ -117,7 +117,7 @@
       <input type="number" name="sleep_hours" placeholder="example: 8" required/>
       <label for="notes">Current mood</label>
       <input type="text" name="notes" placeholder="example: I had a great day and slept 9 hours"/>
-
+      
       <input name="submit" type="submit" value="Post Diary entry" class="createEntry" />
     </form>
     <h4>Päiväkirjamerkinnän päivitys:</h4>
@@ -136,11 +136,11 @@
       <input type="number" name="sleep_hours" placeholder="example: 8" required/>
       <label for="notes">Notes about the day</label>
       <input type="text" name="notes" placeholder="example: I had a great day and slept 9 hours"/>
-
+      
       <input name="submit" type="submit" value="Update Diary entry" class="EntryUpdate" />
     </form>
 
-
+    
 </div>
     <!-- "user_id":"11",
     "entry_date":"2024-03-13",
@@ -153,12 +153,10 @@
       const x = document.getElementById("navDemo");
     if (x.className.indexOf("w3-show") == -1) {
       x.className += " w3-show";
-    } else {
+    } else { 
       x.className = x.className.replace(" w3-show", "");
     }
   }
-  </script>
-
-
+  </script>
   </body>
 </html>
